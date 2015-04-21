@@ -1,5 +1,6 @@
 ﻿namespace CameraApplication.ViewModels
 {
+    using System;
     using System.Threading.Tasks;
     using System.Windows.Input;
 
@@ -34,12 +35,23 @@
 
         public TakePictureViewModel(ICameraProvider cameraProvider)
         {
+            if (cameraProvider == null)
+            {
+                throw new ArgumentNullException("cameraProvider");
+            }
+
             TakePicture = new Command(async () => await TakePictureAsync());
             this.cameraProvider = cameraProvider;
         }
 
         private async Task TakePictureAsync()
         {
+            var photoResult = await cameraProvider.TakePictureAsync();
+
+            if (photoResult != null)
+            {
+                Picture = photoResult.Picture;
+            }
         }
     }
 }

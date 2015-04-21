@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-
-namespace CameraApplication.Views
+﻿namespace CameraApplication.Views
 {
+    using CameraApplication.Common;
+    using CameraApplication.ViewModels;
+
+    using Xamarin.Forms;
+
     public partial class TakePicturePage : ContentPage
     {
         public TakePicturePage()
         {
             InitializeComponent();
+
+            BindingContext = new TakePictureViewModel(DependencyService.Get<ICameraProvider>());
         }
     }
 }

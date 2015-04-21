@@ -40,7 +40,6 @@ namespace CameraApplication.WinPhone.Dependencies
                 tcs.TrySetResult(null);
                 return;
             }
-
             
             CameraResult result = new CameraResult();
             result.Picture = ImageSource.FromStream(() => photoResult.ChosenPhoto);
