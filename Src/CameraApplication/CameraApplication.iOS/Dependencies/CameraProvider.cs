@@ -34,7 +34,7 @@ namespace CameraApplication.iOS
 				{
 					CameraResult result = new CameraResult();
 					result.Picture = ImageSource.FromStream(imgData.AsStream);
-					result.FileUri = jpgFilename;
+					result.FullFilePath = jpgFilename;
 
 					tcs.TrySetResult(result);
 				} 
