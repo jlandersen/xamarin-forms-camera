@@ -32,7 +32,7 @@ namespace CameraApplication.Droid
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            CameraProvider.OnResult();
+            CameraProvider.OnResult(resultCode);
         }
     }
 }

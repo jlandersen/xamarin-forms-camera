@@ -48,8 +48,22 @@ namespace CameraApplication.Droid.Dependencies
             return tcs.Task;
         }
 
-        public static void OnResult()
+        public static void OnResult(Result resultCode)
         {
+            if (resultCode == Result.Canceled)
+            {
+                tcs.TrySetResult(null);
+
+                return;
+            }
+
+            if (resultCode != Result.Ok)
+            {
+                tcs.TrySetException(new Exception("Unexpected error"));
+
+                return;
+            }
+
             CameraResult res = new CameraResult();
             res.Picture = ImageSource.FromFile(file.Path);
             res.FullFilePath = file.Path; 
