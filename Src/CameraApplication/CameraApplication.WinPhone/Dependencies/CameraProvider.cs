@@ -43,7 +43,7 @@ namespace CameraApplication.WinPhone.Dependencies
             
             CameraResult result = new CameraResult();
             result.Picture = ImageSource.FromStream(() => photoResult.ChosenPhoto);
-            result.FullFilePath = photoResult.OriginalFileName;
+            result.FilePath = photoResult.OriginalFileName;
 
             tcs.TrySetResult(result);
         }

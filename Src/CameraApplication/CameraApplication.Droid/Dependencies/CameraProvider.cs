@@ -45,6 +45,7 @@ namespace CameraApplication.Droid.Dependencies
             activity.StartActivityForResult(intent, 0);
 
             tcs = new TaskCompletionSource<CameraResult>();
+
             return tcs.Task;
         }
 
@@ -53,20 +54,18 @@ namespace CameraApplication.Droid.Dependencies
             if (resultCode == Result.Canceled)
             {
                 tcs.TrySetResult(null);
-
                 return;
             }
 
             if (resultCode != Result.Ok)
             {
                 tcs.TrySetException(new Exception("Unexpected error"));
-
                 return;
             }
 
             CameraResult res = new CameraResult();
             res.Picture = ImageSource.FromFile(file.Path);
-            res.FullFilePath = file.Path; 
+            res.FilePath = file.Path; 
 
             tcs.TrySetResult(res);
         }

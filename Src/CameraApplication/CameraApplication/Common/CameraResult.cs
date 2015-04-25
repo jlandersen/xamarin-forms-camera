@@ -6,6 +6,6 @@
     {
         public ImageSource Picture { get; set; }
 
-        public string FullFilePath { get; set; } 
+        public string FilePath { get; set; } 
     }
 }
