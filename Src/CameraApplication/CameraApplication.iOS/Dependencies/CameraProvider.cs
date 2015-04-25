@@ -19,14 +19,21 @@ namespace CameraApplication.iOS
 		{
 			var tcs = new TaskCompletionSource<CameraResult>();
 
-			Camera.TakePicture(UIApplication.SharedApplication.KeyWindow.RootViewController, (obj) => {
-				var photo = obj.ValueForKey(new NSString("UIImagePickerControllerOriginalImage")) as UIImage;
+			Camera.TakePicture(UIApplication.SharedApplication.KeyWindow.RootViewController, (imagePickerResult) => {
 
-				// You can also get photo meta data with using the following
+				if (imagePickerResult == null) 
+				{
+					tcs.TrySetResult(null);
+					return;
+				}
+
+				var photo = imagePickerResult.ValueForKey(new NSString("UIImagePickerControllerOriginalImage")) as UIImage;
+
+				// You can get photo meta data with using the following
 				// var meta = obj.ValueForKey(new NSString("UIImagePickerControllerMediaMetadata")) as NSDictionary;
 
 				var documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-				string jpgFilename = Path.Combine(documentsDirectory, Guid.NewGuid().ToString() + ".jpg");
+				string jpgFilename = Path.Combine(documentsDirectory, Guid.NewGuid() + ".jpg");
 				NSData imgData = photo.AsJPEG();
 				NSError err = null;
 

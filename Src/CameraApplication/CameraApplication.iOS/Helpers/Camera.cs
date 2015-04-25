@@ -57,6 +57,15 @@ namespace CameraApplication.iOS
 				picker.DismissViewController(true, (Action)null);
 				cb(info);
 			}
+				
+			public override void Canceled(UIImagePickerController picker)
+			{
+				var cb = _callback;
+				_callback = null;
+
+				picker.DismissViewController(true, (Action)null);
+				cb(null);
+			}
 		}
 
 		public static void TakePicture(UIViewController parent, Action<NSDictionary> callback)
